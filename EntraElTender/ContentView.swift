@@ -6,19 +6,29 @@
 //
 
 import SwiftUI
+import CoreLocation // For location services
+import UserNotifications // For notifications
 
 struct ContentView: View {
+    @State private var notificationsEnabled = false
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Notificaciones de lluvia")
+                .font(.largeTitle)
+            Text("Activar notificaciones para entrar el tender")
+            
+            Toggle("Activar notificaciones", isOn: $notificationsEnabled)
+                .onChange(of: notificationsEnabled) {
+                    if notificationsEnabled { // Access the value directly
+                        requestNotificationPermissions()
+                    }
+                }
         }
         .padding()
     }
-}
 
-#Preview {
-    ContentView()
+    func requestNotificationPermissions() {
+        // Request user permission for notifications
+    }
 }
